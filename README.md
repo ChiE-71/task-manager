@@ -1,2 +1,2 @@
 # task-manager
-A fullstack task manager built with React, Express, Prisma, and PostgreSQL.
+A fullstack task manager built with React, Express, and PostgreSQL.
