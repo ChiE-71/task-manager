@@ -1,0 +1,17 @@
+### Register a user
+POST http://localhost:5003/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "testuser2@gmail.com",
+    "password": "123123123"
+}
+
+### Login a user
+POST http://localhost:5003/api/auth/login
+Content-Type: application/json  
+
+{
+    "email": "testuser1@gmail.com",
+    "password": "testpassword1"
+}
