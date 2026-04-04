@@ -38,6 +38,9 @@ router.post("/register", async (req, res) => {
     } else {
       const hashedPassword = bcrypt.hashSync(password, 10);
       await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, hashedPassword]);
+      const newUser = await pool.query("SELECT * FROM users WHERE LOWER(email) = LOWER($1)", [email]);
+      const newUserId = newUser.rows[0].id;
+      await pool.query("INSERT INTO tasks (user_id, task, created_at) VALUES ($1, $2, CURRENT_TIMESTAMP)", [newUserId, "Welcome! Here's your first task! Create new task for yourself!"]);
       return res
       .status(200)
       .json({ message: `User registered successfully, ${email}` });
@@ -58,14 +61,12 @@ router.post("/login", async (req, res) => {
     const result = await pool.query("SELECT * FROM users WHERE LOWER(email) = LOWER($1)", [email]);
     const user = result.rows[0];
 
-    console.log(user);
-
-    if (user.failed_attempts >= 5 && user.last_failed_attempt) {
+    if (user.failed_attempts > 5 && user.last_failed_attempt) {
       const lastFailedAttempt = new Date(user.last_failed_attempt);
       const now = new Date();
       const timeDiff = (now - lastFailedAttempt) / (1000 * 60); // Time difference in minutes
 
-      if (timeDiff <= 5) {
+      if (timeDiff < 5) {
         return res.status(403).json({ message: "Account locked due to too many failed login attempts. Please try again later." });
       } else {
         await pool.query("UPDATE users SET failed_attempts = 0 WHERE id = $1", [user.id]);
@@ -91,7 +92,7 @@ router.post("/login", async (req, res) => {
     // Generate JWT token (if using)
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    let last_login = new Date();
+    const last_login = new Date();
     await pool.query("UPDATE users SET last_login = $1 WHERE id = $2", [last_login, user.id]);
     await pool.query("UPDATE users SET failed_attempts = 0 WHERE id = $1", [user.id]);
 
