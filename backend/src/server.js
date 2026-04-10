@@ -1,6 +1,6 @@
 import express from 'express';
 import authRoutes from './routes/authRoutes.js';
-// import taskRoutes from './routes/tasks.js';
+import taskRoutes from './routes/taskRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 5003;
@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
-// app.use('/api/tasks', taskRoutes);
+app.use('/api/tasks', taskRoutes);
 
 // Start the server
 app.listen(PORT, () => {
