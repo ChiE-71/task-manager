@@ -1,8 +1,12 @@
 import express from 'express';
+import cors from 'cors';
 import authRoutes from './routes/authRoutes.js';
 import taskRoutes from './routes/taskRoutes.js';
 
 const app = express();
+app.use(cors({
+  origin: 'http://localhost:5173', // Adjust this if your frontend runs on a different port
+}));
 const PORT = process.env.PORT || 5003;
 
 // Middleware
