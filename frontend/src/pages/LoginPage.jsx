@@ -34,12 +34,12 @@ function LoginPage() {
     <div className="bg-background text-font">
       <div className="login-page flex flex-col items-center justify-center min-h-screen gap-3">
         <div>
-          <h1 className="font-heading text-2xl font-semibold">TASK MANAGER</h1>
+          <h1 className="font-heading text-4xl font-semibold">TASK MANAGER</h1>
         </div>
         <div>
-          <h2 className="font-body text-xl font-medium mb-3">Login</h2>
+          <h2 className="font-body text-2xl font-medium mb-3">Login</h2>
         </div>
-        <div>
+        <div className="w-full max-w-sm">
           <form onSubmit={handleSubmit}>
             <div>
               <input
@@ -47,7 +47,7 @@ function LoginPage() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mb-3 border border-gray-300 rounded-3xl px-6 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent w-full"
+                className="mb-3 border border-gray-300 rounded-3xl px-6 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent w-full text-lg h-12"
               />
             </div>
             <div className="flex flex-row items-center relative mb-3">
@@ -56,9 +56,9 @@ function LoginPage() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="border border-gray-300 rounded-l-3xl px-6 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent w-full"
+                className="border border-gray-300 rounded-l-3xl px-6 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent w-full text-lg h-12"
               />
-              <div className="border border-gray-300 rounded-r-3xl px-1 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent w-12 align-middle justify-center flex">
+              <div className="border border-gray-300 rounded-r-3xl px-1 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent w-12 h-12 align-middle justify-center flex">
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
@@ -71,17 +71,19 @@ function LoginPage() {
             <div className="text-center">
               <button
                 type="submit"
-                className="bg-primary text-font py-2 px-4 rounded-3xl hover:bg-blue-400 active:bg-blue-500 w-full mb-3"
+                className="bg-primary text-font py-2 px-4 rounded-3xl hover:bg-blue-400 active:bg-blue-500 w-full mb-3 text-lg h-12"
               >
                 Login
               </button>
-              <button
-                className="bg-primary text-font py-2 px-4 rounded-3xl hover:bg-blue-400 active:bg-blue-500 w-full"
-              >
-                <a href="/register">Create an Account</a>
-              </button>
+              
             </div>
           </form>
+          <button
+                onClick={() => navigate("/register")}
+                className="bg-primary text-font py-2 px-4 rounded-3xl hover:bg-blue-400 active:bg-blue-500 w-full text-lg h-12"
+              >
+                Create an Account
+              </button>
         </div>
       </div>
     </div>
