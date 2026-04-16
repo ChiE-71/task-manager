@@ -45,20 +45,21 @@ function RegisterPage() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mb-3 border border-gray-300 rounded-3xl px-6 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent w-full text-lg h-12"
+                className="mb-3 border border-white/10 bg-background/60 backdrop-blur-md rounded-xl px-6 py-2 focus:outline-none focus:ring-2 w-full text-lg h-12 transition"
               />
             </div>
-            <div className="flex flex-row items-center relative mb-3">
+            <div className="flex flex-row items-center relative mb-3 group focus-within:ring-2 rounded-xl">
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="border border-gray-300 rounded-l-3xl px-6 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent w-full text-lg h-12"
+                className="border border-white/10 bg-background/60 backdrop-blur-md  rounded-l-xl px-6 py-2 focus:outline-none focus:ring-2 focus:border-transparent w-full text-lg h-12 transition"
               />
-              <div className="border border-gray-300 rounded-r-3xl px-1 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent w-12 h-12 align-middle justify-center flex">
+              <div className="border border-white/10 bg-background/60 backdrop-blur-md rounded-r-xl p-3  px-1 py-2 w-12 h-12 align-middle justify-center flex group-focus-within:ring-2 transition">
                 <button
                   type="button"
+                  onMouseDown={(e) => e.preventDefault()}
                   onClick={() => setShowPassword(!showPassword)}
                   className="items-center align-middle"
                 >
@@ -72,7 +73,7 @@ function RegisterPage() {
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="border border-gray-300 rounded-3xl px-6 py-2 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent w-full text-lg h-12"
+                className="border border-white/10 bg-background/60 backdrop-blur-md rounded-xl px-6 py-2 focus:outline-none focus:ring-2 focus:border-transparent w-full text-lg h-12 transition"
               />
             </div>
             <div className="text-center">

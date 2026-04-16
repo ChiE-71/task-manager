@@ -11,12 +11,11 @@ function LoginPage() {
 
   useEffect(() => {
     const usertoken = localStorage.getItem("token");
-    
+
     if (usertoken) {
       navigate("/");
     }
   }, [navigate]);
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,7 +46,7 @@ function LoginPage() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mb-3 border px-6 py-2 focus:outline-none focus:ring-2 border-white/10 rounded-xl p-3 bg-background/60 backdrop-blur-md w-full text-lg h-12"
+                className="mb-3 border px-6 py-2 focus:outline-none focus:ring-2 transition border-white/10 rounded-xl p-3 bg-background/60 backdrop-blur-md w-full text-lg h-12"
               />
             </div>
             <div className="flex flex-row items-center relative mb-3 group focus-within:ring-2 rounded-xl">
@@ -56,9 +55,9 @@ function LoginPage() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="border border-white/10 rounded-l-xl p-3 bg-background/60 backdrop-blur-md px-6 py-2 focus:outline-none focus:ring-2 focus:border-transparent w-full text-lg h-12"
+                className="border border-white/10 rounded-l-xl p-3 bg-background/60 backdrop-blur-md px-6 py-2 focus:outline-none transition focus:ring-2 focus:border-transparent w-full text-lg h-12"
               />
-              <div className="border border-white/10 rounded-r-xl p-3 bg-background/60 backdrop-blur-md px-1 py-2 w-12 h-12 align-middle justify-center flex group-focus-within:ring-2">
+              <div className="border border-white/10 bg-background/60 backdrop-blur-md rounded-r-xl p-3  px-1 py-2 w-12 h-12 align-middle justify-center flex group-focus-within:ring-2 transition">
                 <button
                   type="button"
                   onMouseDown={(e) => e.preventDefault()}
@@ -76,15 +75,14 @@ function LoginPage() {
               >
                 Login
               </button>
-              
             </div>
           </form>
           <button
-                onClick={() => navigate("/register")}
-                className="bg-primary text-font py-2 px-4 rounded-3xl hover:bg-blue-400 active:bg-blue-500 w-full text-lg h-12"
-              >
-                Create an Account
-              </button>
+            onClick={() => navigate("/register")}
+            className="bg-primary text-font py-2 px-4 rounded-3xl hover:bg-blue-400 active:bg-blue-500 w-full text-lg h-12"
+          >
+            Create an Account
+          </button>
         </div>
       </div>
     </div>
