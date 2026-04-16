@@ -17,16 +17,16 @@ router.get("/", protect, async (req, res) => {
 
 // Create a new task for the authenticated user
 router.post("/", protect, async (req, res) => {
-  const { task } = req.body;
+  const { description } = req.body;
 
-  if (!task || typeof task !== "string" || task.trim() === "") {
-    return res.status(400).json({ message: "Task must be a non-empty string" });
+  if (!description || typeof description !== "string" || description.trim() === "") {
+    return res.status(400).json({ message: "Description must be a non-empty string" });
   }
 
   try {
     const result = await pool.query(
-      "INSERT INTO tasks (user_id, task, created_at) VALUES ($1, $2, CURRENT_TIMESTAMP) RETURNING *",
-      [req.user.id, task.trim()]
+      "INSERT INTO tasks (user_id, description, created_at) VALUES ($1, $2, CURRENT_TIMESTAMP) RETURNING *",
+      [req.user.id, description.trim()]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -44,7 +44,7 @@ router.patch("/:id", protect, async (req, res) => {
     const updatedResult = await pool.query(
       `UPDATE tasks 
        SET 
-         task = COALESCE($1, task),
+         description = COALESCE($1, description),
          completed = COALESCE($2, completed),
          updated_at = CURRENT_TIMESTAMP
        WHERE id = $3 AND user_id = $4
