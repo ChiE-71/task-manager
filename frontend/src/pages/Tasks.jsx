@@ -50,7 +50,7 @@ function Tasks() {
               type="checkbox"
               checked={task.completed}
               onChange={() => toggleCompleted(task)}
-              className="mx-5 w-6 h-6 flex-shrink-0 appearance-none border-2 border-font rounded-sm cursor-pointer
+              className="mx-5 w-6 h-6 shrink-0 appearance-none border-2 border-font rounded-sm cursor-pointer
                          checked:bg-primary checked:border-primary"
             />
             <p
