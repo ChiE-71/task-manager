@@ -44,9 +44,7 @@ function Tasks() {
         return (
           <div
             key={task.id}
-            className={`flex items-center border-2 border-font rounded-xl p-2 ${
-              task.completed ? "bg-gray-100" : "bg-background"
-            }`}
+            className={"flex items-center border-2 border-font rounded-xl p-2 bg-background"}
           >
             <input
               type="checkbox"
