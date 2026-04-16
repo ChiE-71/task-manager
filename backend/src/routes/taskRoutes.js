@@ -36,19 +36,22 @@ router.post("/", protect, async (req, res) => {
 });
 
 // Update a task by ID for the authenticated user  
-router.put("/:id", protect, async (req, res) => {
+router.patch("/:id", protect, async (req, res) => {
   const { id } = req.params;
-  const { task } = req.body;
-
-  if (!task || typeof task !== "string" || task.trim() === "") {
-    return res.status(400).json({ message: "Task must be a non-empty string" });
-  }
+  const { task, completed } = req.body;
 
   try {
     const updatedResult = await pool.query(
-      "UPDATE tasks SET task = $1, updated_at = CURRENT_TIMESTAMP WHERE id = $2 AND user_id = $3 RETURNING *",
-      [task.trim(), id, req.user.id]
+      `UPDATE tasks 
+       SET 
+         task = COALESCE($1, task),
+         completed = COALESCE($2, completed),
+         updated_at = CURRENT_TIMESTAMP
+       WHERE id = $3 AND user_id = $4
+       RETURNING *`,
+      [task ? task.trim() : null, completed, id, req.user.id]
     );
+
     if (updatedResult.rows.length === 0) {
       return res.status(404).json({ message: "Task not found" });
     }
