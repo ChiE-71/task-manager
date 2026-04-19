@@ -8,6 +8,7 @@ function RegisterPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordHint, setShowPasswordHint] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -22,7 +23,7 @@ function RegisterPage() {
       navigate("/");
     } catch (error) {
       console.log(error);
-      alert("Registration failed");
+      document.querySelector(".registerFailtextbox").textContent = "Registration failed, please input a valid email and password.";
     }
   };
 
@@ -37,6 +38,9 @@ function RegisterPage() {
             Register an account
           </h2>
         </div>
+        <div>
+          <p className="registerFailtextbox"></p>
+        </div>
         <div className="w-full max-w-sm">
           <form onSubmit={handleSubmit}>
             <div>
@@ -49,11 +53,18 @@ function RegisterPage() {
               />
             </div>
             <div className="flex flex-row items-center relative mb-3 group focus-within:ring-2 rounded-xl">
+              {showPasswordHint && (
+                <div className="absolute -top-12 right-0 bg-background/80 backdrop-blur-md border border-white/10 text-sm px-3 py-2 rounded-lg shadow-lg">
+                  Password must be at least 8 characters
+                </div>
+              )}
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                onFocus={() => setShowPasswordHint(true)}
+                onBlur={() => setShowPasswordHint(false)}
                 className="border border-white/10 bg-background/60 backdrop-blur-md  rounded-l-xl px-6 py-2 focus:outline-none focus:ring-2 focus:border-transparent w-full text-lg h-12 transition"
               />
               <div className="border border-white/10 bg-background/60 backdrop-blur-md rounded-r-xl p-3  px-1 py-2 w-12 h-12 align-middle justify-center flex group-focus-within:ring-2 transition">

@@ -25,7 +25,7 @@ function LoginPage() {
       navigate("/");
     } catch (error) {
       console.log(error);
-      alert("Login failed");
+      document.querySelector(".loginFailtextbox").textContent = "Invalid email or password, try again.";
     }
   };
 
@@ -37,6 +37,9 @@ function LoginPage() {
         </div>
         <div>
           <h2 className="font-body text-2xl font-medium mb-3">Login</h2>
+        </div>
+        <div>
+          <p className="loginFailtextbox"></p>
         </div>
         <div className="w-full max-w-sm">
           <form onSubmit={handleSubmit}>
