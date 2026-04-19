@@ -46,4 +46,25 @@ This project was built by first designing the backend API structure, followed by
 5. Handled state management and UI updates in React
 6. Debugged data flow issues between frontend and backend
 
+## What I Learned
+
+* How REST APIs work in a real application
+* Managing data flow between frontend and backend
+* Handling authentication and protecting routes
+* Structuring a full-stack project
+* Debugging issues across multiple layers (UI, API, database)
+* Importance of consistent naming between frontend and backend
+* Importance of a good dataflow model, data flows and architecture of frontend, backend and database
+
+## How Can It Be Improved?
+
+* Add task categories or tags
+* Implement refresh token and access token for Token system
+* Improve UI/UX design
+* Implement real-time updates (e.g. WebSockets)
+* Write unit and integration tests
+
+## How to Run the Project
+
+
 
