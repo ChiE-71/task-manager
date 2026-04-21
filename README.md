@@ -63,6 +63,7 @@ This project was built by first designing the backend API structure, followed by
 * Improve UI/UX design
 * Implement real-time updates (e.g. WebSockets)
 * Write unit and integration tests
+* Add different type of users: Admin
 * Implement spam login detection by IP address and counter by adding CAPTCHA
 
 ## How to Run the Project
