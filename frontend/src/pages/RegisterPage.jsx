@@ -1,4 +1,5 @@
 import axios from "axios";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
@@ -9,6 +10,7 @@ function RegisterPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordHint, setShowPasswordHint] = useState(false);
+  const [captcha, setCaptcha] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,12 +20,17 @@ function RegisterPage() {
         alert("Passwords do not match");
         return;
       }
+      if (!captcha) {
+        alert("Please verify captcha");
+        return;
+      }
       const res = await axios.post("/api/auth/register", { email, password });
       localStorage.setItem("token", res.data.token);
       navigate("/");
     } catch (error) {
       console.log(error);
-      document.querySelector(".registerFailtextbox").textContent = "Registration failed, please input a valid email and password.";
+      document.querySelector(".registerFailtextbox").textContent =
+        "Registration failed, please input a valid email and password.";
     }
   };
 
@@ -88,6 +95,10 @@ function RegisterPage() {
               />
             </div>
             <div className="text-center">
+              <ReCAPTCHA
+                sitekey="6LcGOr8sAAAAAO1Bu_bDkn4MKqXFAYU11EnmX0yJ"
+                onChange={(value) => setCaptcha(value)}
+              />
               <button
                 type="submit"
                 className="bg-primary text-font py-2 px-4 rounded-3xl hover:bg-blue-400 active:bg-blue-500 w-full mb-3 h-12"

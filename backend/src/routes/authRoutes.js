@@ -1,12 +1,44 @@
 import express, { json } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import axios from "axios";
 import pool from "../db.js";
 
 const router = express.Router();
 
+const verifyCaptcha = async (token) => {
+  try {
+    const response = await axios.post(
+      `https://www.google.com/recaptcha/api/siteverify`,
+      null,
+      {
+        params: {
+          secret: process.env.RECAPTCHA_SECRET,
+          response: token,
+        },
+      },
+    );
+
+    return response.data.success;
+  } catch (error) {
+    console.error("Error verifying captcha:", error);
+    return false;
+  }
+};
+
 router.post("/register", async (req, res) => {
-  let { email, password } = req.body;
+  let { email, password, captcha } = req.body;
+
+  if (!captcha) {
+    return res.status(400).json({ message: "Captcha is required" });
+  }
+
+  // Check if captcha is valid
+  const isHuman = await verifyCaptcha(captcha);
+
+  if (!isHuman) {
+    return res.status(400).json({ message: "Captcha failed" });
+  }
 
   email = email.trim().toLowerCase();
 
@@ -67,9 +99,13 @@ router.post("/register", async (req, res) => {
       );
 
       // Generate JWT token (if using)
-      const token = jwt.sign({ id: newUser.rows[0].id }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-      });
+      const token = jwt.sign(
+        { id: newUser.rows[0].id },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h",
+        },
+      );
 
       const last_login = new Date();
       await pool.query("UPDATE users SET last_login = $1 WHERE id = $2", [
@@ -80,9 +116,11 @@ router.post("/register", async (req, res) => {
         newUser.rows[0].id,
       ]);
 
-      return res
-        .status(200)
-        .json({ message: "User registered successfully", user: { id: newUser.rows[0].id, email: newUser.rows[0].email }, token });
+      return res.status(200).json({
+        message: "User registered successfully",
+        user: { id: newUser.rows[0].id, email: newUser.rows[0].email },
+        token,
+      });
     }
   } catch (err) {
     console.error(err);
@@ -103,6 +141,10 @@ router.post("/login", async (req, res) => {
     );
     const user = result.rows[0];
 
+    if (!user) {
+      return res.status(400).json({ message: "Invalid email or password" });
+    }
+
     if (user.failed_attempts > 5 && user.last_failed_attempt) {
       const lastFailedAttempt = new Date(user.last_failed_attempt);
       const now = new Date();
@@ -120,7 +162,7 @@ router.post("/login", async (req, res) => {
       }
     }
 
-    if (user && user.failed_attempts >= 5) {
+    if (user.failed_attempts >= 5) {
       await pool.query(
         "UPDATE users SET last_failed_attempt = NOW() WHERE id = $1",
         [user.id],
