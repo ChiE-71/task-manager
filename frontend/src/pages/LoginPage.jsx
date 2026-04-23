@@ -1,4 +1,5 @@
 import axios from "axios";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
@@ -7,6 +8,7 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [captcha, setCaptcha] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,6 +22,10 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (!captcha) {
+        alert("Please verify captcha");
+        return;
+      }
       const res = await axios.post("/api/auth/login", { email, password });
       localStorage.setItem("token", res.data.token);
       navigate("/");
@@ -71,7 +77,11 @@ function LoginPage() {
                 </button>
               </div>
             </div>
-            <div className="text-center">
+           <div className="flex flex-col items-center justify-center gap-3">
+              <ReCAPTCHA
+                sitekey="6LcGOr8sAAAAAO1Bu_bDkn4MKqXFAYU11EnmX0yJ"
+                onChange={(value) => setCaptcha(value)}
+              />
               <button
                 type="submit"
                 className="bg-primary text-font py-2 px-4 rounded-3xl hover:bg-blue-400 active:bg-blue-500 w-full mb-3 text-lg h-12"

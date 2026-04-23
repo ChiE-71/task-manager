@@ -94,7 +94,7 @@ function RegisterPage() {
                 className="border border-white/10 bg-background/60 backdrop-blur-md rounded-xl px-6 py-2 focus:outline-none focus:ring-2 focus:border-transparent w-full text-lg h-12 transition"
               />
             </div>
-            <div className="text-center">
+            <div className="flex flex-col items-center justify-center gap-3">
               <ReCAPTCHA
                 sitekey="6LcGOr8sAAAAAO1Bu_bDkn4MKqXFAYU11EnmX0yJ"
                 onChange={(value) => setCaptcha(value)}
