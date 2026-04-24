@@ -3,6 +3,8 @@ This is a full-stack task management web application that allows users to create
 
 The goal of this project is to demonstrate how frontend, backend, and database systems work together in a real-world application. Another goal for this project also for me to learn regarding the technologies used in frontend, backend and database.
 
+---
+
 ## Technologies Used
 
 ### Frontend
@@ -67,7 +69,6 @@ This project was built by first designing the backend API structure, followed by
 * Implement spam login detection by IP address
 
 ## How to Run the Project
-## How to Run the Project
 
 Follow the steps below to run this project locally.
 
@@ -77,8 +78,6 @@ Follow the steps below to run this project locally.
 git clone https://github.com/your-username/task-manager.git
 cd task-manager
 ```
-
----
 
 ### 2. Setup Backend
 
@@ -109,8 +108,6 @@ or
 node index.js
 ```
 
----
-
 ### 3. Setup Database (PostgreSQL)
 
 Make sure PostgreSQL is running, then:
@@ -125,8 +122,6 @@ npx prisma migrate dev
 ```
 
 If you're using raw SQL, run your `.sql` file manually.
-
----
 
 ### 4. Setup Frontend
 
@@ -143,8 +138,6 @@ Start the frontend:
 npm run dev
 ```
 
----
-
 ### 5. Access the Application
 
 Open your browser and go to:
@@ -154,8 +147,6 @@ http://localhost:5173
 ```
 
 (Port may vary depending on your setup)
-
----
 
 ### 6. Notes
 
