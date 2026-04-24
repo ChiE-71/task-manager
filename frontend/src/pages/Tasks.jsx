@@ -143,7 +143,7 @@ function Tasks() {
             <button
               onClick={() => openConfirm(task)}
               onMouseDown={(e) => e.preventDefault()}
-              className="mx-3 w-8 h-8 flex items-center justify-center rounded-full border"
+              className="mx-3 w-8 h-8 flex items-center justify-center rounded-full border hover:bg-hover transition"
               aria-label="Delete task"
             >
               <svg
@@ -171,13 +171,13 @@ function Tasks() {
             <div className="flex justify-end gap-2">
               <button
                 onClick={closeConfirm}
-                className="px-4 py-2 rounded-md border border-gray-300 text-font hover:bg-gray-100"
+                className="px-4 py-2 rounded-md border border-gray-300 text-font hover:bg-hover"
               >
                 Cancel
               </button>
               <button
                 onClick={confirmDelete}
-                className="px-4 py-2 rounded-md bg-red-500 text-font hover:bg-red-600"
+                className="px-4 py-2 rounded-md bg-red-600 text-font hover:bg-red-700"
               >
                 Delete
               </button>
@@ -207,7 +207,7 @@ function Tasks() {
           />
           <button
             onClick={createTask}
-            className="ml-3 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-200 transition"
+            className="ml-3 w-8 h-8 flex items-center justify-center rounded-full hover:bg-hover transition"
             aria-label="Add task"
           >
             <svg

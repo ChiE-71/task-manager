@@ -43,14 +43,14 @@ function HomePage() {
         <div className="p-6 flex flex-col gap-4">
           <button
             onClick={logout}
-            className="text-left px-4 py-2 rounded-md bg-red-500 text-white hover:bg-red-600"
+            className="font-body text-left px-4 py-2 rounded-md bg-red-600 text-font hover:bg-red-700"
           >
             Log out
           </button>
 
           <button
             onClick={() => setMenuOpen(false)}
-            className="text-sm text-gray-400 hover:text-white text-left"
+            className="font-body text-left px-4 py-2 rounded-md text-sm text-gray-400 hover:text-font"
           >
             Close
           </button>
