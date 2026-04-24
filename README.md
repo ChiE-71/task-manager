@@ -64,9 +64,103 @@ This project was built by first designing the backend API structure, followed by
 * Implement real-time updates (e.g. WebSockets)
 * Write unit and integration tests
 * Add different type of users: Admin
-* Implement spam login detection by IP address and counter by adding CAPTCHA
+* Implement spam login detection by IP address
 
 ## How to Run the Project
+## How to Run the Project
 
+Follow the steps below to run this project locally.
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/task-manager.git
+cd task-manager
+```
+
+---
+
+### 2. Setup Backend
+
+Navigate to the backend folder and install dependencies:
+
+```bash
+cd backend
+npm install
+```
+
+Create a `.env` file in the backend directory and add the following:
+
+```env
+PORT=5000
+DATABASE_URL=your_postgresql_connection_string
+JWT_SECRET=your_secret_key
+```
+
+Start the backend server:
+
+```bash
+npm run dev
+```
+
+or
+
+```bash
+node index.js
+```
+
+---
+
+### 3. Setup Database (PostgreSQL)
+
+Make sure PostgreSQL is running, then:
+
+- Create a database
+- Run your schema (tables for `users` and `tasks`)
+
+If you're using Prisma:
+
+```bash
+npx prisma migrate dev
+```
+
+If you're using raw SQL, run your `.sql` file manually.
+
+---
+
+### 4. Setup Frontend
+
+Open a new terminal and navigate to the frontend folder:
+
+```bash
+cd frontend
+npm install
+```
+
+Start the frontend:
+
+```bash
+npm run dev
+```
+
+---
+
+### 5. Access the Application
+
+Open your browser and go to:
+
+```
+http://localhost:5173
+```
+
+(Port may vary depending on your setup)
+
+---
+
+### 6. Notes
+
+- Ensure backend is running before frontend
+- Make sure your database connection string is correct
+- Update API base URL in frontend if needed
 
 
